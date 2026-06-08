@@ -7,6 +7,6 @@
 # * https://testthat.r-lib.org/articles/special-files.html
 
 library(testthat)
-library(batchr)
+library(batchify)
 
-test_check("batchr")
+test_check("batchify")

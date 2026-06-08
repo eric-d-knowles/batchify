@@ -1,4 +1,4 @@
-# batchr 0.1.0
+# batchify 0.1.0
 
 * Initial release.
 * `batchify()`: convert a notebook to an R script and submit as a Slurm batch job.

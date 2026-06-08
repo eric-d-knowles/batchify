@@ -1,14 +1,14 @@
 
 <!-- README.md is generated from README.Rmd. Please edit that file -->
 
-# batchr
+# batchify
 
 <!-- badges: start -->
 
-[![R-CMD-check](https://github.com/eric-d-knowles/batchr/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/eric-d-knowles/batchr/actions/workflows/R-CMD-check.yaml)
+[![R-CMD-check](https://github.com/eric-d-knowles/batchify/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/eric-d-knowles/batchify/actions/workflows/R-CMD-check.yaml)
 <!-- badges: end -->
 
-`batchr` makes it easy to submit R, R Markdown, Quarto, and Jupyter
+`batchify` makes it easy to submit R, R Markdown, Quarto, and Jupyter
 notebooks as batch jobs on a [Slurm](https://slurm.schedmd.com/) HPC
 cluster. It extracts R code from your notebook, writes it to a
 standalone script, and generates a ready-to-submit `.slurm` job file —
@@ -16,12 +16,12 @@ all in one call.
 
 ## Installation
 
-You can install the development version of batchr from
+You can install the development version of batchify from
 [GitHub](https://github.com/) with:
 
 ``` r
 # install.packages("pak")
-pak::pak("eric-d-knowles/batchr")
+pak::pak("eric-d-knowles/batchify")
 ```
 
 ## Usage
@@ -33,7 +33,7 @@ script, creates a timestamped run directory, and generates (and
 optionally submits) a Slurm batch script.
 
 ``` r
-library(batchr)
+library(batchify)
 
 batchify(
   "analysis.qmd",
