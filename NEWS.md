@@ -4,3 +4,4 @@
 * `batchify()`: convert a notebook to an R script and submit as a Slurm batch job.
 * `make_sbatch()`: generate a Slurm batch script for an R job.
 * `capture_code()`: extract R code from `.R`, `.Rmd`, `.qmd`, and `.ipynb` files.
+* `launcher` argument to `make_sbatch()`/`batchify()`: prepend a command prefix to the `Rscript` call, e.g. `"numactl --interleave=all"`.

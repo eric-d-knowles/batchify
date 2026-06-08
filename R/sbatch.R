@@ -15,6 +15,9 @@
 #'   (default), no `--array` directive is written.
 #' @param r_args Character vector of additional arguments passed to `Rscript`.
 #'   Defaults to `character(0)`.
+#' @param launcher Character vector prepended to the `Rscript` invocation,
+#'   e.g. `"numactl --interleave=all"` to set the process's NUMA memory
+#'   policy. Defaults to `character(0)` (no prefix).
 #' @param env Conda environment name to activate before running the script.
 #'   Defaults to `"myR"`.
 #' @param conda_sh Path to the conda `conda.sh` initialisation script. Must be
@@ -42,6 +45,7 @@
 make_sbatch <- function(
     r_script, job_name = "rjob", cpus = 8L, mem = "64G", time = "12:00:00",
     partition = NULL, array = NULL, r_args = character(0),
+    launcher = character(0),
     env = "myR", conda_sh,
     log_dir = "logs", email = NULL, mail_type = "END,FAIL",
     extra_sbatch = character(0), out_file = NULL, submit = FALSE) {
@@ -64,7 +68,7 @@ make_sbatch <- function(
     extra_sbatch)
   body <- c(paste0('source "', conda_sh, '"'),
             paste0("conda activate ", env), "",
-            paste(c("Rscript", shQuote(r_script), r_args), collapse = " "))
+            paste(c(launcher, "Rscript", shQuote(r_script), r_args), collapse = " "))
   writeLines(c("#!/bin/bash", directives, "", body, ""), out_file)
   message("Wrote ", out_file)
   if (submit)

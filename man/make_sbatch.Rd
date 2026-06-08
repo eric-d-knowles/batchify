@@ -13,6 +13,7 @@ make_sbatch(
   partition = NULL,
   array = NULL,
   r_args = character(0),
+  launcher = character(0),
   env = "myR",
   conda_sh,
   log_dir = "logs",
@@ -43,6 +44,10 @@ make_sbatch(
 
 \item{r_args}{Character vector of additional arguments passed to \code{Rscript}.
 Defaults to \code{character(0)}.}
+
+\item{launcher}{Character vector prepended to the \code{Rscript} invocation,
+e.g. \code{"numactl --interleave=all"} to set the process's NUMA memory
+policy. Defaults to \code{character(0)} (no prefix).}
 
 \item{env}{Conda environment name to activate before running the script.
 Defaults to \code{"myR"}.}
