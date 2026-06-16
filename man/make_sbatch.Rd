@@ -82,6 +82,7 @@ script via \code{Rscript}. Optionally submits the job immediately with \code{sba
 \examples{
 \dontrun{
 make_sbatch("job.R", job_name = "my_job", cpus = 4, mem = "32G",
+            conda_sh = "/opt/conda/etc/profile.d/conda.sh",
             email = "user@example.com", submit = TRUE)
 }
 }

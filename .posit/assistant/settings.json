@@ -1,0 +1,17 @@
+{
+  "permission": {
+    "edit": {
+      "*.md": "allow",
+      "*/.Rbuildignore": "allow",
+      "*/DESCRIPTION": "allow",
+      "*/WORDLIST": "allow",
+      "*.R": "allow"
+    },
+    "bash": {
+      "mkdir *": "allow"
+    },
+    "executeCode": {
+      "*": "allow"
+    }
+  }
+}
