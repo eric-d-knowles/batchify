@@ -11,8 +11,7 @@
 `batchify` makes it easy to submit R, R Markdown, Quarto, and Jupyter
 notebooks as batch jobs on a [Slurm](https://slurm.schedmd.com/) HPC
 cluster. It extracts R code from your notebook, writes it to a
-standalone script, and generates a ready-to-submit `.slurm` job file —
-all in one call.
+standalone script, and generates a ready-to-submit `.slurm` job file.
 
 ## Installation
 
