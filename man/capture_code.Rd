@@ -39,11 +39,18 @@ Supports selective extraction via paired \verb{#| batch:start} / \verb{#| batch:
 marker comments.
 }
 \examples{
-\dontrun{
+notebook <- tempfile(fileext = ".R")
+writeLines(c(
+  "before <- 1",
+  "#| batch:start",
+  "excluded <- 2",
+  "#| batch:end",
+  "after <- 3"
+), notebook)
+
 # Extract all code except marked blocks
-code <- capture_code("analysis.qmd", mode = "exclude")
+capture_code(notebook, mode = "exclude")
 
 # Extract only marked blocks
-code <- capture_code("analysis.qmd", mode = "include")
-}
+capture_code(notebook, mode = "include")
 }

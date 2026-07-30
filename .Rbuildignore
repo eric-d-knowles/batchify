@@ -5,3 +5,4 @@
 ^\.github$
 ^\.posit$
 ^CRAN-SUBMISSION$
+^cran-comments\.md$

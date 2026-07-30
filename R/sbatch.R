@@ -23,7 +23,7 @@
 #' @param conda_sh Path to the conda `conda.sh` initialisation script. Must be
 #'   supplied by the user.
 #' @param log_dir Directory for Slurm log files. Created if it does not exist.
-#'   Defaults to `"logs"`.
+#'   If `NULL` (default), the same directory as `out_file` is used.
 #' @param email Email address for Slurm notifications. If `NULL` (default), no
 #'   mail directives are written.
 #' @param mail_type Slurm mail event types. Defaults to `"END,FAIL"`.
@@ -38,8 +38,15 @@
 #' @export
 #'
 #' @examples
+#' r_script <- tempfile(fileext = ".R")
+#' writeLines("print('hello')", r_script)
+#' make_sbatch(r_script, job_name = "my_job", cpus = 4, mem = "32G",
+#'             conda_sh = "/opt/conda/etc/profile.d/conda.sh",
+#'             out_file = tempfile(fileext = ".slurm"), log_dir = tempdir())
+#'
 #' \dontrun{
-#' make_sbatch("job.R", job_name = "my_job", cpus = 4, mem = "32G",
+#' # Submitting requires a real Slurm cluster, which is not available here
+#' make_sbatch(r_script, job_name = "my_job", cpus = 4, mem = "32G",
 #'             conda_sh = "/opt/conda/etc/profile.d/conda.sh",
 #'             email = "user@example.com", submit = TRUE)
 #' }
@@ -48,12 +55,14 @@ make_sbatch <- function(
     partition = NULL, array = NULL, r_args = character(0),
     launcher = character(0),
     env = "myR", conda_sh,
-    log_dir = "logs", email = NULL, mail_type = "END,FAIL",
+    log_dir = NULL, email = NULL, mail_type = "END,FAIL",
     extra_sbatch = character(0), out_file = NULL, submit = FALSE) {
   stopifnot(file.exists(r_script))
-  dir.create(log_dir, recursive = TRUE, showWarnings = FALSE)
   if (is.null(out_file))
     out_file <- file.path(dirname(r_script), paste0(job_name, ".slurm"))
+  if (is.null(log_dir))
+    log_dir <- dirname(out_file)
+  dir.create(log_dir, recursive = TRUE, showWarnings = FALSE)
   log_path <- file.path(log_dir, if (is.null(array)) "%x_%j.out" else "%x_%A_%a.out")
   directives <- c(
     paste0("#SBATCH --job-name=", job_name),

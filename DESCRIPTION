@@ -1,9 +1,9 @@
 Package: batchify
 Title: Convert Notebooks to 'Slurm' Batch Jobs
-Version: 0.1.0
-Authors@R: 
+Version: 0.1.1
+Authors@R:
     person("Eric", "Knowles", , "edk202@nyu.edu", role = c("aut", "cre", "cph"))
-Description: Extracts R code from notebook files ('.R', '.Rmd', '.qmd', or '.ipynb'), optionally keeping or dropping code blocks delimited by marker comments, writes it to a standalone script, and generates a 'Slurm' batch script to run it, optionally submitting the job immediately with 'sbatch'. Supports per-job resource directives (CPUs, memory, wall time, partitions, and job arrays) and a configurable launcher prefix for tools such as 'numactl'.
+Description: Extracts R code from notebook files (.R, .Rmd, .qmd, or .ipynb), optionally keeping or dropping code blocks delimited by marker comments, writes it to a standalone script, and generates a 'Slurm' batch script to run it, optionally submitting the job immediately with 'sbatch'. Supports per-job resource directives (CPUs, memory, wall time, partitions, and job arrays) and a configurable launcher prefix for tools such as 'numactl'.
 License: MIT + file LICENSE
 Encoding: UTF-8
 Language: en-US
@@ -11,10 +11,12 @@ Roxygen: list(markdown = TRUE)
 RoxygenNote: 8.0.0
 URL: https://github.com/eric-d-knowles/batchify
 BugReports: https://github.com/eric-d-knowles/batchify/issues
-Imports: 
+Depends:
+    R (>= 4.1.0)
+Imports:
     jsonlite,
     knitr,
     tools
-Suggests: 
+Suggests:
     testthat (>= 3.0.0)
 Config/testthat/edition: 3

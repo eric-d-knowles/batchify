@@ -16,7 +16,7 @@ make_sbatch(
   launcher = character(0),
   env = "myR",
   conda_sh,
-  log_dir = "logs",
+  log_dir = NULL,
   email = NULL,
   mail_type = "END,FAIL",
   extra_sbatch = character(0),
@@ -56,7 +56,7 @@ Defaults to \code{"myR"}.}
 supplied by the user.}
 
 \item{log_dir}{Directory for Slurm log files. Created if it does not exist.
-Defaults to \code{"logs"}.}
+If \code{NULL} (default), the same directory as \code{out_file} is used.}
 
 \item{email}{Email address for Slurm notifications. If \code{NULL} (default), no
 mail directives are written.}
@@ -80,8 +80,15 @@ Writes a Slurm batch script that activates a conda environment and runs an R
 script via \code{Rscript}. Optionally submits the job immediately with \code{sbatch}.
 }
 \examples{
+r_script <- tempfile(fileext = ".R")
+writeLines("print('hello')", r_script)
+make_sbatch(r_script, job_name = "my_job", cpus = 4, mem = "32G",
+            conda_sh = "/opt/conda/etc/profile.d/conda.sh",
+            out_file = tempfile(fileext = ".slurm"), log_dir = tempdir())
+
 \dontrun{
-make_sbatch("job.R", job_name = "my_job", cpus = 4, mem = "32G",
+# Submitting requires a real Slurm cluster, which is not available here
+make_sbatch(r_script, job_name = "my_job", cpus = 4, mem = "32G",
             conda_sh = "/opt/conda/etc/profile.d/conda.sh",
             email = "user@example.com", submit = TRUE)
 }

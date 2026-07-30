@@ -35,7 +35,9 @@ Creates a timestamped run directory, extracts R code from a notebook using
 submits) a Slurm batch script via \code{\link[=make_sbatch]{make_sbatch()}}.
 }
 \examples{
-\dontrun{
-batchify("analysis.qmd", job_name = "my_analysis", cpus = 4, mem = "32G")
-}
+notebook <- tempfile(fileext = ".R")
+writeLines("print('hello')", notebook)
+batchify(notebook, job_name = "my_analysis", run_root = tempdir(),
+         conda_sh = "/opt/conda/etc/profile.d/conda.sh",
+         cpus = 4, mem = "32G")
 }
